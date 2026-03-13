@@ -1,0 +1,29 @@
+format = """
+[░▒▓](#cba6f7)\
+[ 󰣇 ](bg:#cba6f7 fg:#1e1e2e)\
+[▓▒░](fg:#cba6f7 bg:#89b4fa)\
+[ $directory ](bg:#89b4fa fg:#1e1e2e)\
+[▓▒░](fg:#89b4fa bg:#313244)\
+$git_branch\
+$git_status\
+[▓▒░](fg:#313244)\
+\n$character"""
+
+[directory]
+style = "bg:#89b4fa fg:#1e1e2e"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = ""
+style = "bg:#313244 fg:#cba6f7"
+format = "[ $symbol $branch ]($style)"
+
+[git_status]
+style = "bg:#313244 fg:#f38ba8"
+format = "[ $all_status$ahead_behind ]($style)"
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
