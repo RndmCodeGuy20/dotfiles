@@ -1,0 +1,77 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+  name = Shantanu Mane
+  email = maneshantanu.20@gmail.com
+
+[alias]
+  # --- Status & basics ---
+  ls = status
+  co = checkout
+  br = branch
+  cm = commit
+  last = log -1 HEAD
+
+  # --- Stash ---
+  st = stash push -m
+  sta = stash -u -m
+  stl = stash list
+  staa = stash apply
+  stp = stash pop
+  std = stash drop
+  stc = stash clear
+  stb = stash branch
+  sts = stash show --stat
+  stf = stash show -p  
+
+  # --- Commits ---
+  ci = commit
+  cm = commit -m 
+  ca = commit --amend
+  cane = commit --amend --no-edit
+  cam = commit -am
+
+  # --- Logs & history ---
+  lg = log --oneline --graph --decorate --all
+  ll = log --stat
+  who = shortlog -sn
+  wtf = reflog
+
+  # --- Branching ---
+  new = "!f() { git checkout -b \"$1\"; }; f"
+  del = branch -d
+  cleanup = "!git branch --merged | egrep -v \"(^\\*|main|master)\" | xargs git branch -d"
+
+  # --- Staging ---
+  addp = add -p
+  unstage = restore --staged
+
+  # --- Recovery / oh-no commands ---
+  undo = reset --soft HEAD~1
+  nuke = reset --hard HEAD
+
+  # --- Workflow helpers ---
+  save = "!git add -A && git commit -m \"WIP\""
+
+  # --- Submodule ---
+  smst = submodule foreach 'git status -sb'
+  smup = submodule foreach 'git pull origin main'
+  smfe = submodule foreach 'git fetch'
+  smbr = submodule foreach 'echo \"$name: $(git branch --show-current)\"'
+  diffs = diff --staged -w
+  smco = submodule foreach 'git checkout ' 
+	need-rebase = !sh -c 'git fetch -q origin && git log --left-right --graph --oneline origin/${1:-main}...HEAD' -
+  smpu = submodule foreach 'git pull origin $(git rev-parse --abbrev-ref HEAD)'
+  smpush = submodule foreach 'git push origin $(git rev-parse --abbrev-ref HEAD)'
+  
+[core]
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	syntax-theme = Dracula
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
